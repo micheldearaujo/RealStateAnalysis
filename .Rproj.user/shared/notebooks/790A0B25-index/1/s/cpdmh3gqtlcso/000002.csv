@@ -1,0 +1,2 @@
+"0","anuncios <- anuncios[!duplicated(anuncios),] # Remove as duplicatas"
+"0","anuncios <- select(anuncios, -Anuncio) # Exclui a coluna ""Anuncio"""

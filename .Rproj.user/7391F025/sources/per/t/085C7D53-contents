@@ -1,0 +1,130 @@
+# Análise dos resultados de performance das plataformas
+
+rm(list=ls())
+
+library(tidyverse)
+library(ggplot2)
+library(readr)
+library(stringr)
+library(dplyr)
+
+# Carregando os arquivos
+setwd('C:\\Users\\miche\\PycharmProjects\\Mestrado\\algoritmos\\amazonia\\performance_watt\\edge\\newperformance')
+time1 <- read.csv('performanceedgecnn_1.csv')
+re1 <- read.csv('monitoringedgecnn_1.csv')
+time05 <- read.csv('performanceedgecnn_0.5.csv')
+re05 <- read.csv('monitoringedgecnn_0.5.csv')
+time01 <- read.csv('performanceedgecnn_0.1.csv')
+re01 <- read.csv('monitoringedgecnn_0.1.csv')
+time00 <- read.csv('performanceedgecnn_none.csv')
+re00 <- read.csv('monitoringedgecnn_none.csv')
+watts <- read.csv('watt_edge.csv', sep=';')
+
+resources <- list(re00, re01, re05, re1)
+times <- list(time01, time05, time1)
+names <- list('(None Workload)', '(Workload of 0.1)', '(Workload of 0.5)', '(Workload of 1.0)')
+workloads <- list(0, 0.1, 0.5, 1.0)
+algos <- list('CNN', 'KNN', 'RF')
+
+View(re01)
+names(re01)
+
+
+# Transformando o currenTime em diferenças de tempos entre o tempo j e o tempo inicial
+for (i in 1:length(resources)){
+  tempos <- vector()
+  for (j in 1:nrow(resources[[i]])){
+    tempos[j] <- (difftime(resources[[i]]$currentTime[j], resources[[i]]$currentTime[1], units=c('secs')))/60
+  }
+  resources[[i]]$Tempo <- tempos
+}
+
+
+
+#######################################
+##     Memory Usage VS worklaod      ##
+##              CNN                  ##   
+#######################################
+
+# Criando um canvas 2x2 graficos
+par(mfrow=c(2,2))
+for (i in 1:length(resources)){
+  
+  # Plotando os resultados
+  plot(x=resources[[i]]$Tempo,
+       y=resources[[i]]$percentageMemory...,
+       type='l',
+       main=paste('Memory Analysis', names[[i]], sep=' '),
+       xlab='Time (min)',
+       ylab='Memory Usage (%)')
+}
+
+######################################
+##      CPU Usage vs workload       ##
+##             CNN                  ##   
+######################################
+
+par(mfrow=c(2,2))
+for (i in 1:length(resources)){
+  
+  # Plotando os resultados
+  plot(x=resources[[i]]$Tempo,
+       y=resources[[i]]$totalCpuUsage... , # Transformar em MB
+       type='l',
+       main=paste('CPU Analysis', names[[i]], sep=' '),
+       xlab='Time (min)',
+       ylab='CPU Usage (%)')
+}
+
+
+############################################
+##   classificationTime vs workload       ##
+##             CNN                        ##   
+############################################
+
+# Transformando o currenTime em diferenças de tempos entre o tempo j e o tempo inicial
+# groupby workload e média dos tempos
+
+par(mfrow=c(2,2))
+for (i in 1:length(times)){
+  tempos1 <- vector()
+  tempos2 <- vector()
+  
+  for (j in 1:nrow(times[[i]])){
+    tempos1[j] <- (difftime(times[[i]]$currentTime[j], times[[i]]$currentTime[1], units=c('secs')))/60
+    # Transformando o classificationTime em segundos
+    tempos2[j] <- as.numeric(unlist(strsplit(times[[i]]$classificationTime[j], split='\\.'))[2])/1000000
+  }
+  times[[i]]$Tempo <- tempos1
+  times[[i]]$cT <- tempos2
+  
+  times[[i]] <- filter(times[[i]], Tempo<=34)
+  
+  plot(x=times[[i]]$Tempo,
+       y=times[[i]]$cT,
+       type='l',
+       main=paste('ClassificationTime', names[[i+1]], sep=' '),
+       xlab='Time (min)',
+       ylab='Classification Time (s)')
+}
+
+
+
+
+######################################
+##  Consumo de energia e workload   ##
+##              CNN                ##   
+######################################
+
+
+par(mfrow=c(2,2))
+for (i in 1:length(resources)){
+  
+  plot(x=resources[[i]]$Tempo,
+       y=filter(watts, Workload==workloads[[i]] & Algorithm=='RF')$Watts,
+       type='l',
+       main=paste('Watt consumption', names[[i]], sep=' '),
+       xlab='Time (min)',
+       ylim=c(3.1, 5),
+       ylab='Watts')
+}

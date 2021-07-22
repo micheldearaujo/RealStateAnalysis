@@ -1,0 +1,3 @@
+"0","anunciosg <- merge(x=by_state1,"
+"0","                   y=salarios,"
+"0","                   by='Estado')"

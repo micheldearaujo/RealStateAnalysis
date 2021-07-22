@@ -1,0 +1,2 @@
+"0","anuncios$Area <- grep(pattern='[0-9]+\\sm', x=dados, value=TRUE)"
+"0","head(anuncios,2)"

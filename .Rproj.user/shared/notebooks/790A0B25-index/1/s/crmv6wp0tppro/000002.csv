@@ -1,0 +1,4 @@
+"0","anuncios <- data.frame(anuncios[grepl(pattern='quartos?', x=anuncios$Anuncio), ]) # Filtrando dataframe"
+"0","anuncios$Quartos <- grep(pattern='quartos?', x=dados, value=TRUE) # Extraindo a quantidade de quartos"
+"0","anuncios$Quartos <- parse_number(x=anuncios$Quartos, locale=locale(decimal_mark=',', grouping_mark='.')) # Extraindo o valor numérico"
+"0","head(anuncios)"

@@ -1,0 +1,128 @@
+#"""
+#Created on Thu May 13 17:35:30 2021
+
+#@author: micheldearaujo
+
+# learning how to use ggplo2
+#"""
+
+rm(list=ls())
+library(ggplot2)
+library(ggmap)
+library(ggalt)
+
+# Settuping the env
+
+options(scipen=999) # Desliga a nota??o cient?fica
+data('midwest', package='ggplot2') # Carrega os dados do pacote
+
+# Initializa o ggplt
+ggplot(midwest, aes(x=area,y=poptotal)) # Toda informacao sobre o dataframe deve estar em aes()
+# O grafico est? vazio pois nao foi fornecida o tipo de grafico a ser plotado
+
+
+# vamos adicionar um scatter plot
+ggplot(midwest, aes(x=area, y=poptotal)) + geom_point()
+
+# vamos adicionar uma linha de fit
+
+g <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point() + geom_smooth(method='lm', show.legend=T)
+plot(g)
+?geom_smooth
+
+
+# Focando nos pontos que realmente existem
+
+g + xlim(c(0, 0.1)) + ylim(c(0, 1000000)) # deleta os valores e modifica o fit
+
+g1 <- g + coord_cartesian(xlim=c(0, 0.1), ylim=c(0, 1000000)) # Zoom! Nao modifica valores
+
+# Adding titles and labels
+
+g1 + labs(title='Area versus Populacao Meio Oeste', y='Populacao', x='Area', Caption='Midwest demographics')
+
+# Colocando tudo no mesmo lugar:
+ggplot(midwest, aes(x=area, y=poptotal)) +
+  geom_point() +
+  geom_smooth(method='lm') +
+  coord_cartesian(xlim=c(0, 0.1), ylim=c(0, 1000000)) +
+  labs(title='Area versus Populacao Meio Oeste', y='Populacao', x='Area', Caption='Midwest demographics')
+
+
+
+ # Mudando cores estaticas e tamanhos
+
+
+ggplot(midwest, aes(x=area, y=poptotal)) +
+  geom_point(col='steelblue', size=3) +
+  geom_smooth(method='lm') +
+  coord_cartesian(xlim=c(0, 0.1), ylim=c(0, 1000000)) +
+  labs(title='Area versus Populacao Meio Oeste', y='Populacao', x='Area', Caption='Midwest demographics')
+
+# Se para adicionar o HUE do python seaborn?
+
+gg <- ggplot(midwest, aes(x=area, y=poptotal)) +
+  geom_point(aes(col=state), size=3) +
+  geom_smooth(method='lm') +
+  coord_cartesian(xlim=c(0, 0.1), ylim=c(0, 1000000)) +
+  labs(title='Area versus Populacao Meio Oeste', y='Populacao', x='Area', Caption='Midwest demographics')
+
+# mudando a paleta de cores
+
+gg <- gg + scale_colour_brewer(palette='PuBuGn')
+library(RColorBrewer)
+display.brewer.all()
+
+# -------- Definir os ticks
+
+gg <- gg + scale_x_continuous(breaks=seq(0, 0.1, 0.01))
+gg <- gg +  scale_y_continuous(breaks=seq(0, 1000000, 200000), labels = function(x){paste0(x/1000, 'K')})
+plot(gg)
+
+
+
+# -------- PLOTTING MAPS -----------
+install.packages(c("cowplot", 'rgeos',"googleway", "ggrepel", "ggspatial", "libwgeom", "sf", "rnaturalearth", "rnaturalearthdata"))
+library(ggplot2)
+library(sf)
+theme_set(theme_bw())                 
+library(rnaturalearth)
+library(rnaturalearthdata)
+world <- ne_countries(scale='medium', returnclass='sf')
+class(world)
+View(world)
+file5 <- 'D:/michel/Universidade/Mestrado/disciplina/repo/data/rent_prices_geo.csv'
+rents_geo <- read.csv(file5, encoding='latin-1')
+View(rents_geo)
+
+rents_geo<- drop_na(rents_geo)
+aps <- st_as_sf(rents_geo, coords=c("Longitude", "Latitude"), crs=4326, agr='constant')
+
+ggplot(data=world) +
+  geom_sf(aes(fill=pop_est)) +
+  geom_point(data=locations.sf, aes(x='Longitude', y='Latitude'), size=2, shape=23, fill='darkred')+
+  scale_fill_viridis_c(option='plasma', trans='sqrt')+
+  xlab("Longitude") + ylab("Latitude") +
+  #coord_sf(xlim=c(-75, -30), ylim=c(-35,5), expand=FALSE) +
+  ggtitle("World map", subtitle = paste0("(", length(unique(world$name)), " countries)"))
+
+
+ggplot(data=rents_geo) + 
+  geom_sf()
+
+
+library(sf)
+br_data <- list_geobr()
+br_data
+br <- read_country(year=2010)
+states <- read_state(year=2018)
+
+
+br <- read_municipality(, year=2018)
+
+ggplot() +
+  geom_sf(data=states, fill='steelblue', color='black')
+
+ggplot() +
+  geom_sf(data=br, fill='steelblue', color='yellow', size=0.15) +
+  geom_point(data=locations.sf, aes(x='Longitude', y='Latitude'), size=2, shape=23, fill='darkred')

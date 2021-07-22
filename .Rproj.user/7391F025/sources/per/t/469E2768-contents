@@ -1,0 +1,139 @@
+library(ggplot2)
+library(sf)
+library(plotly)
+library(rnaturalearth)
+library(geobr)
+
+setwd('D:/michel/Universidade/Mestrado/disciplina/repo/2_VA/ProjetoFinal')
+file5 <- 'rmr_cities.csv'
+rmr <- read.csv(file5, encoding='latin-1')
+
+# --------- # Following the GIS R tutorial # -------
+# ----------- Spatial Data with sp ------------#
+br_data <- list_geobr()
+br_data
+states <- read_state(year=2018)
+cities <- read_municipality(year=2018)
+
+# ploting Brazil and states
+ggplot() +
+  geom_sf(data=states, fill='steelblue', color='black')
+
+# ploting Brazil and cities
+ggplot() +
+  geom_sf(data=cities, fill='steelblue', color='black')
+
+# Criando um DF apenas com as coordenadas
+rents <- drop_na(filter(rents_geo, Preco<20000))
+coords <- select(rents, Longitude, Latitude)
+data <- select(rents, Tipo, Preco, Quartos, Banheiros)
+
+
+# Primeiro ? preciso transformar a coluna 'Tipo' em fator, por raz?es da estrutura
+# do SpatialPoints
+data <- data %>%
+  mutate(Tipo=as_factor(Tipo))
+
+
+View(coords)
+
+# Transformando em SpatialPoints
+points_sp <- SpatialPoints(coords=coords,
+                           proj4string=CRS("+proj=longlat +datum=WGS84"))
+points_sp
+
+# Agora vamos combinar geo-data mais + n?o-geodata em um objeto espec?fico
+points_spdf <- SpatialPointsDataFrame(coords = coords,
+                                      data=data,
+                                      proj4string = CRS("+proj=longlat +datum=WGS84"))
+?rnaturalearth
+# Agora vamos baixar os mapas
+countries <- ne_countries(scale='medium')
+brazil <- ne_states(country='brazil')
+
+
+install.packages("rnaturalearthhires", repos = "http://packages.ropensci.org", type = "source")
+# Plotting
+palette(alpha(c("darkorchid", "darkorange"), 0.7))
+
+plot(brazil,
+     col=gray(0.8),
+     border=gray(0.7))
+
+plot(points_spdf,
+     pch = 20,
+     col = points_spdf$Tipo,
+     cex = sqrt(points_spdf$Preco)/90,
+     add=TRUE)
+
+
+
+box()
+# Legend for colors
+legend("topright", legend = levels(points_spdf$Tipo),
+       pt.cex = 2,
+       col = 1:2,
+       pch = 15)
+
+# legend for size of points
+legend("right", legend = pointsize,
+       pt.cex = (sqrt(pointsize)/2 + 0.25),
+       col = "black",
+       pch = 20,
+       title = "Letters")
+
+# Title for the map
+title(main = "Distribui??o dos im?veis")
+
+
+# -------------- Spatial data with sf ------------ #
+
+# Para criar um dataframe com coordenadas a partir de colunas de latitude e longitude
+# utilizando o sf ? mais simples. Usamos o dataframe original com todas as informa??es
+
+points_sf <- st_as_sf(rents, coords=c('Longitude','Latitude'), crs=4326)
+countries_sf <- ne_countries(scale='medium', returnclass='sf')
+states_sf <- ne_states(country='brazil', returnclas='sf')
+
+# Agora podemos usar o dplyr para manipular os dados 
+filter(points_sf, Preco>20)
+
+library(ggrepel)
+install.packages('ggrepel')
+
+palette('default')
+
+
+ggplot() +
+  geom_sf(data=states_sf,
+          fill=gray(0.8), color=gray(0.7)) +
+  geom_sf(data=points_sf,
+          aes(color=Tipo, size=Preco/100),
+          alpha=0.7,
+          show.legend='point') +
+  #coord_sf(xlim = c(-75,-30), ylim = c(-32, 5),
+   #        datum = NA) + # removes graticules
+  labs(title = "Distribui??o dos pre?os dos im?veis",
+       size = "Preco",
+       color = "Tipo") +
+  guides(color = guide_legend(override.aes = list(size = 6))) +
+  theme_void()
+
+
+# ------------------------
+maps::map('world','brazil', lwd=0.5, fill=T, col='grey95')
+maps::map.axes()
+maps::map.scale(ratio=T, cex=0.5)
+tweets_br <- 
+with(lat_lng(tweets), points(lng, lat, pch=20, cex=0.75, col=rgb(0, 0.3, 0.7, 0.75)))
+
+
+
+
+#------ PLOTLY
+library(rjson)
+View(rmr)
+rmr <- st_as_sf(rmr, coords=c('geometry'), crs=4326)
+ggplot() +
+  geom_sf(data=rmr,
+          fill=gray(0.8), color=gray(0.7))

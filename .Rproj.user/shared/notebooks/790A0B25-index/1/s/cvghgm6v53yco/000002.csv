@@ -1,0 +1,2 @@
+"0","anuncios <- data.frame(Anuncio=anuncios[grepl(pattern='casa|apartamento|sobrado', x=anuncios$Anuncio), ])"
+"0","anuncios$Tipo <- unlist(str_extract_all(pattern='apartamento|casa|sobrado',string=anuncios$Anuncio))"

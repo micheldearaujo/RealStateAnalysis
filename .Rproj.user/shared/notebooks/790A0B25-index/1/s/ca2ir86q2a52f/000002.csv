@@ -1,0 +1,8 @@
+"0","# Criando um boxplot em que os dois tipos de imóveis são separados por cores."
+"0","bx3 <- plot_ly(data=anunciosf,"
+"0","               color=~Tipo, # Separação"
+"0","               colors=c('#FF5653', '#5A41F3')) %>%"
+"0","  add_boxplot(y=~Preco) %>%"
+"0","  layout(title='Distribuição dos preços dos imóveis',"
+"0","         width=700)"
+"0","bx3"

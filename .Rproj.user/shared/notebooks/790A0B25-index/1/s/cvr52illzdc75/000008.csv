@@ -1,0 +1,4 @@
+"0","anuncios$Tipo <- unlist(str_extract_all(pattern='apartamento|casa|sobrado',string=anuncios$Anuncio))"
+"2","Error in `$<-.data.frame`(`*tmp*`, Tipo, value = c(""apartamento"", ""apartamento"",  : 
+  replacement has 39764 rows, data has 39912
+"

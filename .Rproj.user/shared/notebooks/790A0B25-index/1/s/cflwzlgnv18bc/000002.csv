@@ -1,0 +1,1 @@
+"0","head(select(anunciosf, -c(1:5)), 5)"

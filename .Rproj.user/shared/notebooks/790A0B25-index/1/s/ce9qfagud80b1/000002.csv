@@ -1,0 +1,4 @@
+"0","anuncios$Preco <- grep(pattern='/mês', x=dados, value=TRUE)"
+"2","Error in `$<-.data.frame`(`*tmp*`, Preco, value = c(""R$ 1.300 /mês"", ""R$ 1.500 /mês"",  : 
+  replacement has 39123 rows, data has 39764
+"

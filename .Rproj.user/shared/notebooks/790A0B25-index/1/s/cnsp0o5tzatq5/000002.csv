@@ -1,0 +1,4 @@
+"0","anuncios$Quartos <- grep(pattern='quartos?', x=dados, value=TRUE)"
+"2","Error in `$<-.data.frame`(`*tmp*`, Quartos, value = c(""1 quarto"", ""2 quartos"",  : 
+  replacement has 39176 rows, data has 39189
+"

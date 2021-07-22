@@ -1,0 +1,11 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/778504/d9da2332426d4c4e8d4266e07e9b005c
+bundleId: https://api.rpubs.com/api/v1/document/778504/d9da2332426d4c4e8d4266e07e9b005c
+url: http://rpubs.com/michelarrudala/778504
+when: 1625776708.28339
+lastSyncTime: 1625776708.28339

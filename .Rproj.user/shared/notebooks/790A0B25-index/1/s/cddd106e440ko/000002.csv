@@ -1,0 +1,2 @@
+"0","anuncios$Endereco <- grep(pattern='-', x=dados, value=TRUE)"
+"0","head(anuncios,2)"
