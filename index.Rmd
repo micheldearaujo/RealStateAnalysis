@@ -8,7 +8,8 @@ output:
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-setwd('D:/michel/Universidade/Mestrado/disciplina/repo/2_VA/ProjetoFinal')
+#install.packages('rgeos')
+
 ```
 
 ## Introdução
@@ -76,16 +77,13 @@ O objetivo orignal dos dados é a comercialização de imóveis, pois é um site
 Como o processo de Webscraping depende bastante da velocidade da internet, realizei a coleta de todos anúncios durante o período de Abril à Junho. Pode ter levado mais tempo do que o necessário, mas eu ainda estava aprendendo sobre o processo de automatização e com certeza cometi algumas redundâncias no algoritmo (por exemplo, tive que ir manualmente escolhendo as regiões geográficas porque só é possivel filtrar até 5 regiões e o site não disponibiliza todas as páginas sem filtragem.)
 O processo de Webscraping retorna uma string contendo todas as informações do anúncio em questão, como pode ser visto na figura 1.
 
-![Figura 1](D:/michel/Universidade/Mestrado/disciplina/repo/2_VA/ProjetoFinal/fig1.png)
+![Figura 1](D:/Projects/DataScience/Brazil_RealState/data/fig1.png)
 Dessa forma, o dataset original possui apenas uma variável. No entanto, ela será expandida e novas variáveis serão criadas para que seja possível realizar a análise.
 
 #### Importando e conhecendo o dataset
 Vamos botar a mão na massa e começar o trabalho. O primeiro passo é importar os dados e conhecer a estrutura do mesmo.
 ```{r importando, message=FALSE, warning=FALSE}
-# As strings possuem muitos acentos, então é recomendável escolher o encoding como 'latin' para que todos
-# os caracteres sejam reconhecidos.
-#anuncios <- read.csv('housing_prices.csv', encoding='latin')
-anuncios <- read.csv('housing_prices.csv')
+anuncios <- read.csv('data/housing_prices.csv')
 print('Estrutura do dataset: ')
 str(anuncios)
 print('Algumas linhas')
@@ -327,7 +325,7 @@ Dessa forma, irei conduzir agora uma AE nos dados limpos e transformados na seç
 #### Exploração inicial
 Começo importando o arquivo `imoveis.csv` que salvei no final da seção passada.
 ```{r message=FALSE, warning=FALSE}
-anuncios <- read.csv('imoveis.csv')
+anuncios <- read.csv('data/imoveis.csv')
 #anuncios <- read_csv('imoveis.csv', locale=locale(encoding='latin1'))
 head(anuncios,5)
 ```
@@ -699,7 +697,7 @@ Para finalizar esta parte, podemos olhar a relação entre a média dos valores 
 
 ```{r message=FALSE, warning=TRUE}
 # Lendo o arquivo que contém a média salarial por estado
-salarios <- read.csv('salarios.csv', sep=';')
+salarios <- read.csv('data/salarios.csv', sep=';')
 names(salarios)[2] <- 'MediaSalario'
 head(salarios, 5)
 ```
@@ -979,7 +977,7 @@ Dessa forma, podemos citar, por exemplo, estados com custo de vida "baixo": Rio 
 
 Dessa forma, este modelo exploratório, juntamente com sua continuação, descrita na seção por vir, é de grande utilizadade para as pessoas que estão à procura de um novo lar para morar, para as pessoas que possuiem uma propriedade e desejam comercializá-la e para as corretoras de imóveis, que lidam todos os dias com comercialização de imóveis e desejam se tornar empresas guiadas por dados.
 Utilizando o [*Microsoft Power BI*](https://powerbi.microsoft.com/en-us/) é possível resumir algumas as informações através de um Dashboard:
-![Dasboard Estratégico](Dashboard_Final.png)
+![Dasboard Estratégico](data/Dashboard_Final.png)
 
 #### Este projeto não acaba por aqui
 Apesar de ter obtido boas conclusões, este projeto ainda precisa de melhorias, tais como:
