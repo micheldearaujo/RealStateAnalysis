@@ -1,1 +1,0 @@
-"0","head(data.frame(anuncios[!grepl(pattern='/mês', x=anuncios$Anuncio), ]), 3)"

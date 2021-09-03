@@ -1,8 +1,0 @@
-"0","plot_ly(data=anuncios,"
-"0","        type='box',"
-"0","        colors=c('#157B38')) %>% # Adicionando a cor verde para a área"
-"0","  add_trace(y=~Area,"
-"0","            name='Área (m²)',"
-"0","            color='#157B38') %>%"
-"0","  layout(width=800,               # Aumentando a largura do gráfico"
-"0","         yaxis=list(title='Valor'))"

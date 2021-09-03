@@ -1,7 +1,0 @@
-"0","rmr_sf <- rmr_sf[-1,]"
-"0",""
-"0","# Plotando o mapa da RMR com seus municípios"
-"0","rmr_map <- ggplot() +"
-"0","  geom_sf(data=rmr_sf, fill=gray(0.85), color=gray(0.7)) +"
-"0","  labs(title='Região Metropolitana do Recife')"
-"0","rmr_map"

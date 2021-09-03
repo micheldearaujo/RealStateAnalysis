@@ -1,6 +1,0 @@
-"0","# Lendo o mapa do Brasil separado em seus municípios"
-"0","cities <- read_municipality(year=2018, showProgress=FALSE)"
-"0",""
-"0","# Plotando"
-"0","ggplot() +"
-"0","  geom_sf(data=cities, fill=gray(0.85), color=gray(0.7))"

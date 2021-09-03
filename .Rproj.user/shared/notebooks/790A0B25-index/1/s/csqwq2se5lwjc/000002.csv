@@ -1,2 +1,0 @@
-"0","anuncios$Cidade <- gsub(pattern='[[:punct:]]', replacement='', anuncios$Cidade)"
-"0","head(anuncios[,2:7],3)"

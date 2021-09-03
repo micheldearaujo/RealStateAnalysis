@@ -1,2 +1,0 @@
-"0","anuncios$Tipo <- gsub(pattern='apartamento', replacement='AP', x=anuncios$Tipo)"
-"0","anuncios$Tipo <- gsub(pattern='casa|sobrado', replacement='CS', x=anuncios$Tipo)"

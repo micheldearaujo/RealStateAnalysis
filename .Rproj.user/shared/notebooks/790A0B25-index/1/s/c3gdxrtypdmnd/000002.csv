@@ -1,4 +1,0 @@
-"0","anuncios$Cidade <- unlist(str_extract_all(pattern=',\\s.*\\s-', string=anuncios$Endereco))"
-"2","Error in `$<-.data.frame`(`*tmp*`, Cidade, value = c("", Porto Alegre -"",  : 
-  replacement has 39115 rows, data has 39164
-"

@@ -1,3 +1,0 @@
-"0","# Removendo outliers:"
-"0","anunciosf <- anuncios[-which(anuncios$Preco %in% boxplot(anuncios$Preco, plot=F)$out),]"
-"0","anunciosf <- anunciosf[-which(anunciosf$Area %in% boxplot(anunciosf$Area, plot=F)$out),]"

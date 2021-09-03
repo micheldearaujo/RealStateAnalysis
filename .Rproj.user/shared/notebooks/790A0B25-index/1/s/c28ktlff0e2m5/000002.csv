@@ -1,3 +1,0 @@
-"0","anuncios <- read.csv('imoveis.csv')"
-"0","#anuncios <- read_csv('imoveis.csv', locale=locale(encoding='latin1'))"
-"0","head(anuncios,5)"

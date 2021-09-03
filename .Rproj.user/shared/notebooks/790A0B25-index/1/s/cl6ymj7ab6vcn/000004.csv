@@ -1,2 +1,0 @@
-"0","# Verificando a normalidade pelo QQ-plot"
-"0","qqnorm(anunciosf$Preco, main='QQ plot da variável Preço', pch=18)"

@@ -1,6 +1,0 @@
-"0","# Primeiro carrega-se os pacotes necessários para a manipulaçao dos dados e geração de gráficos"
-"0",""
-"0","library(tidyverse) # Manipulação de dataframes"
-"0","library(plotly)    # Gráficos intereativos"
-"0","library(Hmisc)     # Criação de intervalos de variáveis quantitativas"
-"0","library(RColorBrewer) # Cores diversas"

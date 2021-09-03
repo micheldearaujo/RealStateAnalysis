@@ -1,2 +1,0 @@
-"0","anuncios$Estado <- unlist(str_extract_all(pattern='[A-Z]{2}$', string=anuncios$Endereco))"
-"0","head(anuncios,3)"

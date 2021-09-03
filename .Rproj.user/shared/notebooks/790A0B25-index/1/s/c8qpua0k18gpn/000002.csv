@@ -1,2 +1,0 @@
-"0","anuncios$Endereco <- paste(anuncios$Endereco, 'Brazil', sep=', ')"
-"0","#anuncios <- geocode(.tbl=anuncios, address='Endereco')"

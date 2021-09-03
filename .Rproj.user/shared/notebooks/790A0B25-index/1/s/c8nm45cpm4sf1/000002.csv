@@ -1,2 +1,0 @@
-"0","anuncios$Preco <- grep(pattern='/mês|Aluguel', x=dados, value=TRUE)"
-"0","head(anuncios, 2)"

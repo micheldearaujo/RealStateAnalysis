@@ -1,4 +1,0 @@
-"0","# Lendo o arquivo que contém a média salarial por estado"
-"0","salarios <- read.csv('salarios.csv', sep=';')"
-"0","names(salarios)[2] <- 'MediaSalario'"
-"0","head(salarios, 5)"

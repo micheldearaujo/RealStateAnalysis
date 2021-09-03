@@ -1,2 +1,0 @@
-"0","Acima_da_Media <- filter(anunciosg, Proporcao>1)[-2]"
-"0","datatable(Acima_da_Media, caption='Estados com alto custo de vida')"

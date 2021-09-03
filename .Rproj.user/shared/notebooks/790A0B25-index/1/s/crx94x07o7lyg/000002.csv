@@ -1,8 +1,0 @@
-"0","# Recriando os boxplots apenas para imóveis com 1 quarto, através da função Filter"
-"0","bx3 <- plot_ly(data=filter(anunciosf, Quartos==1),"
-"0","               color=~Tipo,"
-"0","               colors=c('#FF5653', '#5A41F3')) %>%"
-"0","  add_boxplot(y=~Preco) %>%"
-"0","  layout(title='Distribuição dos preços dos imóveis',"
-"0","         width=700)"
-"0","bx3"

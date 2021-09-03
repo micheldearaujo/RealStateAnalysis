@@ -1,1 +1,0 @@
-"0","dados <- unlist(strsplit(x=anuncios$Anuncio, split='\n'))"

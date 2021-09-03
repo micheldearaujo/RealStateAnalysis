@@ -1,4 +1,0 @@
-"0","anuncios <- data.frame(anuncios[grepl(pattern=',\\s.*\\s-', x=anuncios$Endereco), ])"
-"0","dados <- unlist(strsplit(x=anuncios$Anuncio, split='\n'))"
-"0","anuncios$Cidade <- unlist(str_extract_all(pattern=',\\s.*\\s-', string=anuncios$Endereco))"
-"0","head(anuncios[3:8,])"
